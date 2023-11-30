@@ -280,9 +280,7 @@ int main() {
     // *            set_base                                 *
     // *            operator<<                               *
     // *******************************************************/
-    std::cout
-        << "\nTEST PHASE 10: Logarithm - constructors, conversion to std::string, set_base, and "
-           "operator<<\n";
+    std::cout << "\nTEST PHASE 10: Logarithm - constructors, conversion to std::string, set_base, and " "operator<<\n";
 
     //{
     //    Logarithm l1;  // default constructor
