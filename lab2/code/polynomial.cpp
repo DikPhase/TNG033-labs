@@ -26,9 +26,10 @@ bool Polynomial::isRoot(double x) const {
 	return std::abs(result) < Epsilon;
 }
 
+// Convert polynomial to string
 Polynomial::operator std::string() const {
 	std::string oss{""};
-	for (std::size_t i = 0; i < coeffecients.size(); ++i) { // FEL metod
+	for (std::size_t i = 0; i < coeffecients.size(); ++i) {
 		if (i > 0)
 		{
 			if (coeffecients[i] < 0)
@@ -60,7 +61,6 @@ Polynomial::operator std::string() const {
 double Polynomial::operator()(double x) const {
 	double result = 0.0;
 	double xPower = 1.0;
-
 	for (const double& coeff : coeffecients) {
 		result += coeff * xPower;
 		xPower *= x;

@@ -54,7 +54,7 @@ public:
     // Convert a polynomial to a string
     explicit operator std::string() const override;
 
-
+    // To be able to check root for specific instance
     double operator()(double x) const override;
 
     Expression* clone() const override;
@@ -63,7 +63,3 @@ public:
 private:
     std::vector<double> coeffecients;
 };
-
-/*
- * std::vector should be used to store polinomial's coefficients
- */
