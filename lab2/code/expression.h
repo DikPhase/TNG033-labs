@@ -49,4 +49,6 @@ protected:
 
     // total number of existing expressions -- only to help to detect bugs in the code
     static std::size_t count_expressions;
+
+    Expression& operator=(const Expression&);
 };

@@ -6,33 +6,38 @@
 #pragma once
 
 #include <iostream>
-#include <format>
 #include <cmath>
+
 #include "expression.h"
 
 class Logarithm : public Expression {
     // ADD CODE
 public:
+    // Constructors
+    Logarithm();
+    Logarithm(const Expression& exp, double c1, double c2, int b);
+    Logarithm(const Logarithm& lgr);
 
-    Logarithm(); // Default constructor
+    // Copy constructor
+    Expression* clone() const override;
 
-    Logarithm(double constant1, double constant2, int base, const Expression& arguemnt); // Constructor with arguments
+    // Deconstructor
+    ~Logarithm();
 
-    ~Logarithm() override; // Default destructor
+    // Assign operator
+    Logarithm& operator=(const Logarithm& lgr);
 
-    void set_base(int newBase);
-
-    bool isRoot(double x) const override;
+    // Override funktioner
+    double operator()(double x) const override;
 
     operator std::string() const override;
 
-    double operator()(double x) const override;
+    bool isRoot(double x) const override;
 
-    Expression* clone() const override;
+    void set_base(int new_base);
 
 private:
-    double constant1;
-    double constant2;
+    double constant1, constant2;
     int base;
-    const Expression& argument;
+    Expression* expr;
 };
