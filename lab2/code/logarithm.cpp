@@ -22,7 +22,9 @@ Logarithm::Logarithm(const Expression& exp, double c1, double c2, int b) {
 }
 
 Logarithm::Logarithm(const Logarithm& arg1) {
-	constant1 = arg1.constant1; constant2 = arg1.constant2; base = arg1.base;
+	constant1 = arg1.constant1; 
+	constant2 = arg1.constant2; 
+	base = arg1.base;
 	expr = arg1.expr->clone();
 }
 

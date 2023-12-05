@@ -8,8 +8,6 @@
 // ADD implementation of the member functions for class Polynomial
 Polynomial::Polynomial(const std::vector<double>& coeffs) : coeffecients(coeffs){}
 Polynomial::Polynomial(const double constant) : coeffecients(std::vector<double>{constant}) {}
-
-
 Polynomial::~Polynomial() {
 	// implement destructor if needed
 }
