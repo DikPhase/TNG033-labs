@@ -13,16 +13,6 @@ Polynomial::~Polynomial() {
 }
 
 /* VIRTUAL FUNCTIONS BEGIN */
-bool Polynomial::isRoot(double x) const {
-	double result = 0.0;
-	double xPower = 1.0;
-
-	for (const double& coeff : coeffecients) {
-		result += coeff * xPower;
-		xPower *= x;
-	}
-	return std::abs(result) < Epsilon;
-}
 
 // Convert polynomial to string
 Polynomial::operator std::string() const {
@@ -33,18 +23,12 @@ Polynomial::operator std::string() const {
 			if (coeffecients[i] < 0)
 			{
 				oss += std::format(" - {:.2f}", abs(coeffecients[i]));
-				if (i > 0)
-				{
-					oss += std::format(" * X^{}", i);
-				}
+				oss += std::format(" * X^{}", i);
 			}
 			else
 			{
 				oss += std::format(" + {:.2f}", coeffecients[i]);
-				if (i > 0)
-				{
-					oss += std::format(" * X^{}", i);
-				}
+				oss += std::format(" * X^{}", i);
 			}
 		}
 		else
@@ -123,8 +107,8 @@ const double& Polynomial::operator[](std::size_t index) const {
 	}
 	else
 	{
-		static const double zero = 0.0;
-		return zero;
+		
+		return 0.0;
 	}
 }
 

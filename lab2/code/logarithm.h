@@ -30,9 +30,7 @@ public:
     // Override funktioner
     double operator()(double x) const override;
 
-    operator std::string() const override;
-
-    bool isRoot(double x) const override;
+    explicit operator std::string() const override;
 
     void set_base(int new_base);
 

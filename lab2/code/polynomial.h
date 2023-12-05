@@ -48,8 +48,6 @@ public:
     double& operator[](std::size_t index);
 
     /* OVERRIDE VIRTUAL FUNCTIONS IN BASE CLASS: START */
-    // Check if its a root 
-    bool isRoot(double x) const override;
 
     // Convert a polynomial to a string
     explicit operator std::string() const override;

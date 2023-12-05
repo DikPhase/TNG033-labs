@@ -19,7 +19,7 @@ public:
     }
 
     // Pure virtual function, needs to be implemented in derived class
-    virtual bool isRoot(double x) const = 0; 
+    bool isRoot(double x) const; 
 
     // Pure virtual function, needs to be implemented in derived class
     virtual explicit operator std::string() const = 0; 

@@ -52,13 +52,9 @@ Logarithm::operator std::string() const {
 		os += std::format(" + {:.2f}", constant2);
 	}
 
-	os += std::format(" * Log_{}( {} )", base, static_cast<std::string>(expr -> operator std::string()));
+	os += std::format(" * Log_{}( {} )", base, std::string(expr -> operator std::string()));
 
 	return os;
-}
-
-bool Logarithm::isRoot(double x) const {
-	return (std::abs((*this)(x)) < Epsilon);
 }
 
 double Logarithm::operator()(double x) const {
