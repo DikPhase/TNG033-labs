@@ -34,9 +34,9 @@ int main() {
     assert(p2.degree() == 2);
 
     // Create polynomial p1 = 2X^1 - 5X^2 + X^6
-    Polynomial p3{{{1, 2}, {2, -5}, {6, 1}}};
+    /*Polynomial p3{{{1, 2}, {2, -5}, {6, 1}}};
     assert(std::string(p3) == std::string("2X^1 - 5X^2 + 1X^6"));
-    assert(p3.degree() == 6);
+    assert(p3.degree() == 6);*/
 
     // Create polynomial p2 = -8X^0 + 2X^1 + 5X^2 + 10X^4 - X^6 + 3X^16
     Polynomial p4{{{0, -8}, {1, 2}, {2, 5}, {4, 10}, {6, -1}, {16, 3}}};

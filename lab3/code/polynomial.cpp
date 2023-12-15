@@ -5,35 +5,23 @@
 
 #include "polynomial.h"
 
+//Polynomial::Polynomial() : terms{ {{0,0}} } {}
+
+Polynomial::Polynomial(int coeff) {
+	if (coeff != 0) {
+		terms[0] = coeff;
+	}
+}
+
 Polynomial::Polynomial(int coefficient, int exponent) {
-	if (coefficient != 0) {
-		terms.push_back(std::make_pair(coefficient, exponent));
+	if (coefficient != 0) { // Checks so the coefficient isnt 0
+		terms[exponent] = coefficient; // Adds a term to the 'terms' map. exponent is used as key and coefficient is corresponding value
 	}
 }
 
-//Polynomial::Polynomial(std::initializer_list<std::pair<int, int>> termList) {
-//	for (const auto& term : termList) {
-//		int coefficient = term.first;
-//		int exponent = term.second;
-//
-//		if (coefficient != 0) {
-//			terms.push_back(std::make_pair(coefficient, exponent));
-//		}
-//	}
-//}
-
-Polynomial::Polynomial(const std::vector<std::pair< int, int>>& termsVector) {
-	for (const auto& term : termsVector) {
-		int coefficient = term.first;
-		int exponent = term.second;
-
-		if (coefficient != 0) {
-			terms.push_back(std::make_pair(coefficient, exponent));
-		}
-	}
+Polynomial::Polynomial(const std::vector<std::pair< int, int>>& termsVector) { // vector of pairs
+	std::copy(termsVector.begin(), termsVector.end(), std::inserter(terms, end(terms)));
 }
-
-Polynomial::Polynomial(int constant) : Polynomial(constant, 0) {}
 
 // Loop through all the terms in the vector.
 int Polynomial::degree() const {
@@ -47,33 +35,33 @@ int Polynomial::degree() const {
 
 // 
 Polynomial::operator std::string() const {
-	std::string result;
+	std::string result = "";
+	int counter = 0;
+	for (auto it = terms.begin(); it != terms.end(); ++it) { // Loop through the entire terms vector
+		
+		int coefficient = it->second; // set coefficient as the first element in the vector pair
+		int exponent = it->first; // set exponent as the second item in pair pair
 
-	for (auto it = terms.rbegin(); it != terms.rend(); ++it) { // Loop through the entire terms vector
-		int coefficient = it->first; // set coefficient as the first element in the vector pair
-		int exponent = it->second; // set exponent as the second item in pair pair
+		if (coefficient == 0 && exponent == 0) {
+			result = "0";
+		}
 
 		if (coefficient < 0) { // If coefficient is negativ
-			coefficient = std::abs(coefficient); // set abs value of coefficient
-			result += " - " + std::to_string(coefficient); // add negative as string along with coefficient
+			coefficient = std::abs(coefficient);// set abs value of coefficient
+			result += std::format(" - {}X^{}", coefficient, exponent); // add negative as string along with coefficient
 		}
-		else if (it != terms.rbegin()) { // Check that it isnt the first term
-			result += " + "; // add positive as string
-		}
-
-		if (exponent == 0 || coefficient != 1) { 
-			result += std::to_string(coefficient);
+		else if (it != terms.begin()) { // Check that it isnt the first term
+			result += std::format(" + {}X^{}", coefficient, exponent) ; // add positive as string
 		}
 
-		if (exponent > 0) { // If exponent is larger than 0
-			result += "X"; // Add X
-			if (exponent > 1) { // exponent larger than one
-				result += "^" + std::to_string(exponent); // add power of exponent
-			}
+		if (counter == 0) {
+			result += std::format("{}X^{}", coefficient, exponent);
 		}
 	}
 	if (terms.empty()) { // If the vector is empty
 		result = "0"; // return 0 as string
 	}
+	counter++;
+	std::cout << result;
 	return result;
 }

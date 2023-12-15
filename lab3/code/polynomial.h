@@ -6,17 +6,24 @@
 #include<vector>
 #include<iostream>
 #include<string>
+#include<map>
+#include<algorithm>
+#include<format>
 
 class Polynomial {
 public:
+	//Polynomial();
+
+	Polynomial(int coeff);
+
 	Polynomial(int coefficient = 0, int exponent = 0);
-	explicit Polynomial(int constant);
-	/*Polynomial(std::initializer_list<std::pair<int, int>> termList);*/
+
 	Polynomial(const std::vector<std::pair<int, int>>& termsVector);
+	
 	int degree() const;
 
 	explicit operator std::string() const;
 
 private:
-	std::vector<std::pair<int, int>> terms;
+	std::map<int,int> terms;
 };
