@@ -10,11 +10,16 @@
 #include <utility>   //std::pair
 #include <fstream>
 #include <cassert>
+#include <algorithm>
 
 
 // A function to test the output of the program
 void test(const std::map<std::string, int>& t, const std::vector<std::pair<std::string, int>>& v,
           const std::string& file_name, int n);
+
+std::string lowerCase(std::string& str);
+
+std::string removePunctuation(const std::string& str);
 
 /***************************
  * Main function           *
@@ -36,15 +41,40 @@ int main() {
     int counter{0};  // to count total number of words read from the input file
 
     //ADD CODE to build table
+    std::string wordHolder;
+    while (in_File >> wordHolder) {
+        std::string line = lowerCase(wordHolder);
+        table[removePunctuation(line)] += 1;
+        counter++;
+    }
 
     std::vector<std::pair<std::string, int>> freq;
 
     //ADD CODE to build vector freq
+    std::transform(table.begin(), table.end(), std::back_inserter(freq),
+        [](const std::pair<const std::string, int>& element) {
+            return element;
+        });
+
+
+    std::sort(freq.begin(), freq.end(), [](const auto& a, const auto& b) {
+        if (a.second != b.second) {
+            return a.second > b.second; //decending 10,9,8...
+        }
+        return a.first < b.first;  //alfabetiskt
+        });
+
+
+
+
+    for (auto e : freq) {
+        std::cout << e.first << " " << e.second << "\n";
+    }
 
 
     /* ************** Testing **************** */
 
-    test(table, freq, name, counter);
+    test(table, freq, file_name, counter);
 }
 
 
@@ -89,4 +119,15 @@ void test(const std::map<std::string, int>& t, const std::vector<std::pair<std::
     assert(v == result2);  // test if vector contents are correct
 
     std::cout << "\nPassed all tests successfully!!\n";
+}
+
+std::string lowerCase(std::string& str) {
+    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {return std::tolower(c); });
+    return str;
+}
+
+std::string removePunctuation(const std::string& str) {
+    std::string result;
+    std::remove_copy_if(str.begin(), str.end(), std::back_inserter(result), [](unsigned char c) { return std::ispunct(c) && c != '\'' && c != '\-'; });
+    return result;
 }
