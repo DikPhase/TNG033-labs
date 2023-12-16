@@ -106,7 +106,6 @@ void test(const std::map<std::string, int>& t, const std::vector<std::pair<std::
      * uppgift1_kort: 69 words
      * uppgift1.txt: 1063 words
      */
-
     assert(total == n);    // test if total number of words is correct
     assert(t == result1);  // test if map/table contents are correct
 
