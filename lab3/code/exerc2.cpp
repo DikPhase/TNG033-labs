@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <utility>   //std::pair
+#include <utility>   
 #include <fstream>
 #include <cassert>
 #include <algorithm>
@@ -19,7 +19,7 @@ void test(const std::map<std::string, int>& t, const std::vector<std::pair<std::
 
 std::string lowerCase(std::string& str);
 
-std::string removePunctuation(const std::string& str);
+std::string removeSpecialChars(const std::string& str);
 
 /***************************
  * Main function           *
@@ -36,7 +36,7 @@ int main() {
 		std::cout << "Could not open input file!!\n";
 		return 0;
 	}
-
+    
     std::map<std::string, int> table;
     int counter{0};  // to count total number of words read from the input file
 
@@ -44,10 +44,9 @@ int main() {
     std::string wordHolder;
     while (in_File >> wordHolder) {
         std::string line = lowerCase(wordHolder);
-        table[removePunctuation(line)] += 1;
+        table[removeSpecialChars(line)] += 1;
         counter++;
     }
-
     std::vector<std::pair<std::string, int>> freq;
 
     //ADD CODE to build vector freq
@@ -55,18 +54,12 @@ int main() {
         [](const std::pair<const std::string, int>& element) {
             return element;
         });
-
-
     std::sort(freq.begin(), freq.end(), [](const auto& a, const auto& b) {
         if (a.second != b.second) {
             return a.second > b.second; //decending 10,9,8...
         }
         return a.first < b.first;  //alfabetiskt
         });
-
-
-
-
     for (auto e : freq) {
         std::cout << e.first << " " << e.second << "\n";
     }
@@ -120,13 +113,22 @@ void test(const std::map<std::string, int>& t, const std::vector<std::pair<std::
     std::cout << "\nPassed all tests successfully!!\n";
 }
 
+
+// Change all chars to a uniform 'case'. i.e either uppercase or lowercase
 std::string lowerCase(std::string& str) {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {return std::tolower(c); });
     return str;
 }
 
-std::string removePunctuation(const std::string& str) {
+
+// Remove special chars unless they are ' or - 
+std::string removeSpecialChars(const std::string& str) {
     std::string result;
-    std::remove_copy_if(str.begin(), str.end(), std::back_inserter(result), [](unsigned char c) { return std::ispunct(c) && c != '\'' && c != '\-'; });
+    std::remove_copy_if(str.begin(), str.end(), std::back_inserter(result), [](unsigned char c) { return std::ispunct(c) && c != '\'' && c != '-'; });
+
+    result.erase(std::remove_if(result.begin(), result.end(), [](char c) {
+        return c == '.' || c == ',' || c == '!' || c == '?' || c == ':' || c == '/' || c == '"' || c == ')' || c == '(' || c == ';';
+        }), result.end());
+
     return result;
 }

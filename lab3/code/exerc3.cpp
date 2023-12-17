@@ -2,13 +2,13 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
-#include <cmath>  // Added for std::pow
-#include <format>
+#include <cmath> 
+#include <iomanip>
 
 // Function to calculate a partial sum for the BBP formula
 double calculate(double k) {
-    double const factor{ 8.0 * k };
-    double const init{ 4.0 / (factor + 1.0) - 1.0 / (factor + 4.0) };
+    const double factor{ 8.0 * k };
+    const double init{ 4.0 / (factor + 1.0) - 1.0 / (factor + 4.0) };
 
     // Vector to store other factors used in the formula
     std::vector<double> other_factors{ 4.0, 5.0, 6.0 };
@@ -53,6 +53,6 @@ int main() {
     double result{ 0.0 };
     result = std::inner_product(terms.begin(), terms.end(), power_terms.begin(), 0.0);
 
-    // Print the result formatted to 15 decimal places
-    std::cout << std::format("{:.15f}\n", result);
+    // Print the result with 15 decimals using setprecision()
+    std::cout << std::setprecision(15) << result ;
 }

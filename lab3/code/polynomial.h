@@ -12,7 +12,7 @@
 
 class Polynomial {
 public:
-	Polynomial();
+	Polynomial() = default;
 
 	Polynomial(int coeff);
 

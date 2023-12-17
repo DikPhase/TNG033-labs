@@ -5,10 +5,6 @@
 
 #include "polynomial.h"
 
-Polynomial::Polynomial() {
-
-}
-
 Polynomial::Polynomial(int coeff) {
 	if (coeff != 0) {
 		terms[0] = coeff;
