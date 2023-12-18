@@ -26,7 +26,7 @@ Polynomial::Polynomial(const std::vector<std::pair< int, int>>& termsVector) { /
 int Polynomial::degree() const {
 	int exponentValue = 0;
 	for (const auto& term : terms) { // set a reference to a term and const to not change value
-		exponentValue = std::max(exponentValue, term.first); // Get the highest value among the second parameters in the vector (exponents)
+		exponentValue = std::max(exponentValue, term.first); // Get the highest value among the first parameters in the vector (exponents)
 	}
 	return exponentValue;
 }
@@ -101,20 +101,15 @@ Polynomial Polynomial::multiply(std::pair<int, int> activeTerms) {
 
 Polynomial Polynomial::operator*=(const Polynomial& rhs) {
     Polynomial result;  // Initialize a temporary polynomial to store the result
-
     if (this->terms.empty() || rhs.terms.empty()) {
         this->terms.clear();  // If either of the polynomials is empty, set the current polynomial to zero
         return *this;         // Return the modified polynomial
     }
-
     Polynomial rhs2 = rhs;  // Create a copy of the right-hand side polynomial
-
     for (auto e : terms) {
         result += rhs2.multiply(e);  // Multiply each term of the current polynomial by rhs2 and accumulate the result
     }
-
     *this = result;  // Update the current polynomial with the final result
-
     return *this;  // Return the modified polynomial
 }
 

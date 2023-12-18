@@ -5,7 +5,7 @@
 #include <cmath> 
 #include <iomanip>
 
-// Function to calculate a partial sum for the BBP formula
+// Function to calculate a partial sum for the formula
 double calculate(double k) {
     const double factor{ 8.0 * k };
     const double init{ 4.0 / (factor + 1.0) - 1.0 / (factor + 4.0) };
@@ -35,7 +35,7 @@ int main() {
     // Initialize terms with consecutive ints using std::iota, i.e 0, 1, 2, 3...
     std::iota(terms.begin(), terms.end(), 0);
 
-    // Create a copy of terms called power_terms, 
+    // Create a copy of terms called power_terms to represent the power of 16 of every element
     std::vector<double> power_terms{ terms };
 
     // Apply the calculate function to each element in terms. Second terms.begin() is output iterator, will be overwritten. 
@@ -46,7 +46,7 @@ int main() {
     // Raise 16 to the power of each element in power_terms
     std::transform(power_terms.begin(), power_terms.end(), power_terms.begin(), [](int i) { return std::pow(16.0, -i); });
     //  [](int i) { return std::pow(16.0, -i); }): Lambda function, takes i as input and returns i to the power of 16
-    // [] specifies that what comes after is a anonymous function, 
+    // [] specifies that what comes after is a anonymous function. 
 
 
     // Calculate the inner product of terms and power_terms

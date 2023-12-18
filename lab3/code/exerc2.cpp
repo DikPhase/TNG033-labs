@@ -50,18 +50,17 @@ int main() {
     std::vector<std::pair<std::string, int>> freq;
 
     //ADD CODE to build vector freq
-    std::transform(table.begin(), table.end(), std::back_inserter(freq),
-        [](const std::pair<const std::string, int>& element) {
-            return element;
-        });
+    std::transform(table.begin(), table.end(), std::back_inserter(freq), // Copy everything from 'table' map and put in 'freq' vector
+        [](const std::pair<const std::string, int>& element) { return element;});
+    
     std::sort(freq.begin(), freq.end(), [](const auto& a, const auto& b) {
         if (a.second != b.second) {
-            return a.second > b.second; //decending 10,9,8...
+            return a.second > b.second; //decending 10,9,8... If true then 'a' pair shoudl come before 'b' pair
         }
-        return a.first < b.first;  //alfabetiskt
+        return a.first < b.first;  // Using < with strings is comparing the alphabetical order 
         });
     for (auto e : freq) {
-        std::cout << e.first << " " << e.second << "\n";
+        std::cout << e.first << " " << e.second << "\n"; // Print the vector to console
     }
 
 
@@ -116,7 +115,7 @@ void test(const std::map<std::string, int>& t, const std::vector<std::pair<std::
 
 // Change all chars to a uniform 'case'. i.e either uppercase or lowercase
 std::string lowerCase(std::string& str) {
-    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {return std::tolower(c); });
+    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char i) {return std::tolower(i); });
     return str;
 }
 
@@ -124,11 +123,6 @@ std::string lowerCase(std::string& str) {
 // Remove special chars unless they are ' or - 
 std::string removeSpecialChars(const std::string& str) {
     std::string result;
-    std::remove_copy_if(str.begin(), str.end(), std::back_inserter(result), [](unsigned char c) { return std::ispunct(c) && c != '\'' && c != '-'; });
-
-    result.erase(std::remove_if(result.begin(), result.end(), [](char c) {
-        return c == '.' || c == ',' || c == '!' || c == '?' || c == ':' || c == '/' || c == '"' || c == ')' || c == '(' || c == ';';
-        }), result.end());
-
+    std::remove_copy_if(str.begin(), str.end(), std::back_inserter(result), [](unsigned char i) { return std::ispunct(i) && i != '\'' && i != '-'; });
     return result;
 }
