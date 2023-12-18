@@ -38,13 +38,13 @@ int main() {
 	}
     
     std::map<std::string, int> table;
-    int counter{0};  // to count total number of words read from the input file
+    int counter{0};  // Count total words from in_File
 
     //ADD CODE to build table
     std::string wordHolder;
-    while (in_File >> wordHolder) {
-        std::string line = lowerCase(wordHolder);
-        table[removeSpecialChars(line)] += 1;
+    while (in_File >> wordHolder) { // Read in word from in_File 
+        std::string line = lowerCase(wordHolder); // Convert word to lowercase
+        table[removeSpecialChars(line)] += 1; // Remove special chars 
         counter++;
     }
     std::vector<std::pair<std::string, int>> freq;

@@ -5,8 +5,9 @@
 
 #include "polynomial.h"
 
+// Sets key (exponent) to zero and "partners" it with given coefficient 
 Polynomial::Polynomial(int coeff) {
-	if (coeff != 0) {
+	if (coeff != 0) { // Checks if coefficient isnt 0
 		terms[0] = coeff;
 	}
 }
@@ -18,7 +19,7 @@ Polynomial::Polynomial(int coefficient, int exponent) {
 }
 
 Polynomial::Polynomial(const std::vector<std::pair< int, int>>& termsVector) { // vector of pairs
-	std::copy(termsVector.begin(), termsVector.end(), std::inserter(terms, end(terms)));
+	std::copy(termsVector.begin(), termsVector.end(), std::inserter(terms, end(terms))); // Inserts a copy of a vector pair into the end of the terms map
 }
 
 // Loop through all the terms in the vector.
