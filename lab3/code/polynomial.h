@@ -29,7 +29,8 @@ public:
 	Polynomial operator*=(const Polynomial& rhs);
 	
 	Polynomial multiply(std::pair<int, int> activeTerms);
-	
+
+	// Overloaded operators are defined outside class. Friend to access private data members of class
 	friend bool operator==(const Polynomial& lhs, const Polynomial& rhs);
 	friend Polynomial operator+(const Polynomial& lhs, const Polynomial& rhs);
 	friend Polynomial operator-(const Polynomial& lhs, const Polynomial& rhs);
@@ -39,7 +40,6 @@ public:
 		return os;
 	}
 
-
 private:
-	std::map<int,int> terms;
+	std::map<int,int> coefficients_table;
 };
