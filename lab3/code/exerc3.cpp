@@ -8,12 +8,12 @@
 // Function to calculate a partial sum for the formula
 double calculate(double k) {
     const double factor{ 8.0 * k };
-    const double init{ 4.0 / (factor + 1.0) - 1.0 / (factor + 4.0) };
+    const double init{ 4.0 / (factor + 1.0) - 1.0 / (factor + 4.0)};
 
     // Vector to store other factors used in the formula
     std::vector<double> other_factors{ 4.0, 5.0, 6.0 };
 
-    // Apply transformation to other_factors using a lambda function
+    // Apply transformation to other_factors. Function can see and modify 'factor' varible
     std::transform(other_factors.begin(), other_factors.end(), other_factors.begin(), [&factor](double d) { return -1.0 / (d + factor); });
 
     // Calculate the result using accumulate
