@@ -107,7 +107,6 @@ const double& Polynomial::operator[](std::size_t index) const {
 	}
 	else
 	{
-		
 		return 0.0;
 	}
 }

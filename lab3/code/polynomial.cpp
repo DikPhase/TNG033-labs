@@ -89,7 +89,7 @@ Polynomial Polynomial::operator-=(const Polynomial& rhs) {
 
 // Multiplies the current polynomial by a single term represented by 'activeTerms'.
 // Returns a new polynomial representing the result of the multiplication.
-Polynomial Polynomial::multiply(std::pair<int, int> activeTerms) {
+Polynomial Polynomial::multiply(std::pair<int, int> activeTerms) const {
     Polynomial result; // Initialize a polynomial to store the results
     for (std::pair<int, int> i : this->coefficients_table) { // Iterate through each term in the polynomial
         int exponent = i.first + activeTerms.first;
@@ -105,9 +105,8 @@ Polynomial Polynomial::operator*=(const Polynomial& rhs) {
         this->coefficients_table.clear();  // If either of the polynomials is empty, set the current polynomial to zero
         return *this;         // Return the modified polynomial
     }
-    Polynomial rhs2 = rhs;  // Create a copy of the right-hand side polynomial
     for (auto i : coefficients_table) {
-        result += rhs2.multiply(i);  // Multiply each term of the current polynomial by rhs2 and accumulate the result
+        result += rhs.multiply(i);  // Multiply each term of the current polynomial by rhs2 and accumulate the result
     }
     *this = result;  // Update the current polynomial with the final result
     return *this;  // Return the modified polynomial
